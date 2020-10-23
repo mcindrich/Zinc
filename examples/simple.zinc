@@ -1,0 +1,40 @@
+mod simple
+import std, string
+
+` single line comment
+
+``
+multiple line comment
+ends
+at the same mark
+``
+
+obj Convertable {
+    fn toInt() -> Int32;
+    fn toString() -> String;
+}
+
+enum Color {
+    Red, Green, Blue
+}
+
+obj SimpleObject : Convertable {
+    ` declarations
+    Age <Int32> = 0
+    Name <String> = ""
+    Colors <Color[]> = []
+
+    fn toString() -> String {
+        ret Name + "; " + Age.toString() + "; " + Colors.toString()
+    }
+}
+
+fn use_convertable(conv<Convertable>) {
+    std.println(conv.toInt())
+}
+
+fn main() {
+    so<SimpleObject> = {Age = 0, Name = "Simple Object", Colors = [Colors.Red, Colors.Blue]}
+    std.println(so.toString())
+    use_convertable(so)
+}
