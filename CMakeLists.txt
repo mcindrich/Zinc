@@ -11,6 +11,9 @@ include_directories(
   "argparse/include"
 )
 
+# for settings and intellisense
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_library(
   ZincVM
   "src/vm/VirtualMachine.cpp"
@@ -23,6 +26,10 @@ add_library(
 add_library(
   ZincLang
   "src/lang/Utils.cpp"
+  "src/lang/Compiler.cpp"
+  "src/lang/Parser.cpp"
+  "src/lang/Tokenizer.cpp"
+  "src/lang/AST.cpp"
 )
 
 add_executable(

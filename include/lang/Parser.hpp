@@ -8,6 +8,8 @@ namespace lang {
     public:
         Parser();
 
+        void parseFile(char *fname);
+
     private:
         Tokenizer m_tokenizer;
     };

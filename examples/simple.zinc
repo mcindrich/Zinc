@@ -1,5 +1,6 @@
 mod simple
-import std, string
+
+import std.string
 
 ` single line comment
 
