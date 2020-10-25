@@ -4,14 +4,14 @@
 
 namespace zinc {
 namespace lang {
-    char *Utils::readFile(char *fname)
+    char *Utils::readFile(const std::string &file_name)
     {
         char *val = nullptr;
         size_t flen = 0;
-        std::ifstream file(fname);
+        std::ifstream file(file_name);
 
         if (!file.is_open()) {
-            throw zinc::ex::InvalidFileException(std::string(fname));
+            throw zinc::ex::InvalidFileException(file_name);
         }
 
         file.seekg(0, std::ios::end);

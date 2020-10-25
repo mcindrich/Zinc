@@ -2,8 +2,8 @@
 
 namespace zinc {
 namespace vm {
-    VirtualMachine::VirtualMachine()
-    {
-    }
+    VirtualMachine::VirtualMachine() { }
+    void VirtualMachine::initMemory(unsigned int size) { }
+    void VirtualMachine::execute(std::list<Instruction> &instructions) { }
 }
 }

@@ -101,6 +101,10 @@ namespace lang {
                 lastToken = i + 1;
             }
         }
+        sub = INPUT.substr(lastToken, INPUT.size() - lastToken);
+        if (sub.length()) {
+            m_tokens.push_back(Token(sub, lineNumber));
+        }
     }
 
     inline bool isDoubleToken(const std::string &INPUT, int pos)

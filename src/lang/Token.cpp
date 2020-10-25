@@ -86,6 +86,27 @@ namespace lang {
         case '#':
             type = TokenType::Hash;
             break;
+        case '+':
+            type = TokenType::Plus;
+            break;
+        case '-':
+            type = TokenType::Minus;
+            break;
+        case '*':
+            type = TokenType::Star;
+            break;
+        case '/':
+            type = TokenType::Slash;
+            break;
+        case '<':
+            type = TokenType::LT;
+            break;
+        case '>':
+            type = TokenType::GT;
+            break;
+        case '=':
+            type = TokenType::Equal;
+            break;
         default:
             type = TokenType::None;
             break;

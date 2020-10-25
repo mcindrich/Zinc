@@ -29,13 +29,16 @@ add_library(
   "src/lang/Compiler.cpp"
   "src/lang/Parser.cpp"
   "src/lang/Tokenizer.cpp"
-  "src/lang/AST.cpp"
   "src/lang/Token.cpp"
+
+  # AST files
+  "src/lang/ast/AST.cpp"
 )
 
 add_executable(
   Zinc
   "src/main.cpp"
+  "src/Program.cpp"
 )
 
 target_link_libraries(Zinc ZincVM ZincLang)

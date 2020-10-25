@@ -7,22 +7,26 @@ namespace zinc {
 namespace lang {
     Parser::Parser() { }
 
-    void Parser::parseFile(char *fname)
+    void Parser::parseFile(const std::string &file_name)
     {
         char *content = NULL;
         try {
-            content = Utils::readFile(fname);
+            content = Utils::readFile(file_name);
         } catch (ex::InvalidFileException &ex) {
             std::cerr << ex.what() << std::endl;
         }
 
-        std::cout << "Content:" << std::endl;
-        std::cout << content << std::endl;
-
         if (content) {
-            m_tokenizer.tokenize(content);
+            try {
+                m_tokenizer.tokenize(content);
+                formAST();
+            } catch (std::runtime_error &ex) {
+                std::cerr << ex.what() << std::endl;
+            }
             delete[] content;
         }
     }
+
+    void Parser::formAST() { }
 }
 }

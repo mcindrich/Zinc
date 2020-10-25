@@ -3,6 +3,7 @@ mod simple
 import std.string
 
 ` Simple Comment
+` another comment
 
 obj Convertable {
     fn toInt() -> Int32;
@@ -10,8 +11,8 @@ obj Convertable {
 }
 
 enum Color {
-    Red, 
-    Green, 
+    Red,
+    Green,
     Blue
 }
 
