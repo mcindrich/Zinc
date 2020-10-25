@@ -5,19 +5,19 @@
 
 namespace zinc {
 namespace lang {
-    Parser::Parser()
-    {
-    }
+    Parser::Parser() { }
 
     void Parser::parseFile(char *fname)
     {
         char *content = NULL;
         try {
             content = Utils::readFile(fname);
-
         } catch (ex::InvalidFileException &ex) {
             std::cerr << ex.what() << std::endl;
         }
+
+        std::cout << "Content:" << std::endl;
+        std::cout << content << std::endl;
 
         if (content) {
             m_tokenizer.tokenize(content);

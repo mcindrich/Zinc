@@ -14,9 +14,9 @@ namespace lang {
             throw zinc::ex::InvalidFileException(std::string(fname));
         }
 
-        file.seekg(std::ios::end);
+        file.seekg(0, std::ios::end);
         flen = file.tellg();
-        file.seekg(std::ios::beg);
+        file.seekg(0);
 
         val = new char[flen + 1];
         file.read(val, flen);

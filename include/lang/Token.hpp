@@ -8,11 +8,12 @@ namespace lang {
         // basic ones
         None = 0,
         Word,
-        Space,
-        Newline,
         String,
+        Newline,
         Number,
         Comment,
+        At,
+        Hash,
         // all parenthesis types
         LParenth,
         RParenth,
@@ -21,6 +22,8 @@ namespace lang {
         LBracket,
         RBracket,
         // operators and separators
+        Semicolon,
+        Colon,
         Dot,
         Comma,
         Plus,
@@ -38,8 +41,8 @@ namespace lang {
         Equal, // =
         // keywords
         Enum,
-        Obj,
-        Fn,
+        Object,
+        Function,
         If,
         Else,
         For,
@@ -49,6 +52,11 @@ namespace lang {
     struct Token {
         std::string value;
         TokenType type;
+        int lineNumber;
+
+        Token(std::string &s, TokenType type, int ln);
+        Token(std::string &s, int ln);
+        Token(char c, int ln);
     };
 }
 }

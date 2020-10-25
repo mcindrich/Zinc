@@ -30,6 +30,7 @@ add_library(
   "src/lang/Parser.cpp"
   "src/lang/Tokenizer.cpp"
   "src/lang/AST.cpp"
+  "src/lang/Token.cpp"
 )
 
 add_executable(

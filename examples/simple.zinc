@@ -2,13 +2,7 @@ mod simple
 
 import std.string
 
-` single line comment
-
-``
-multiple line comment
-ends
-at the same mark
-``
+` Simple Comment
 
 obj Convertable {
     fn toInt() -> Int32;
@@ -16,7 +10,9 @@ obj Convertable {
 }
 
 enum Color {
-    Red, Green, Blue
+    Red, 
+    Green, 
+    Blue
 }
 
 obj SimpleObject : Convertable {

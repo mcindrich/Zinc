@@ -1,4 +1,5 @@
 #include <Zinc.hpp>
+#include <argparse/argparse.hpp>
 using namespace zinc;
 
 int main(int argc, char **argv)

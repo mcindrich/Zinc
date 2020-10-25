@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <lang/Token.hpp>
+#include <list>
 
 namespace zinc {
 namespace lang {
@@ -12,7 +12,8 @@ namespace lang {
         void tokenize(char *input);
 
     private:
-        std::vector<Token> m_tokens;
+        void splitIntoTokens(const std::string &INPUT);
+        std::list<Token> m_tokens;
     };
 }
 }
