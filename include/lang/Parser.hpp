@@ -14,11 +14,20 @@ namespace lang {
 
     private:
         void formAST();
-
+        // expr (2 + 3 | a + b | someVar<Type> = 2 + 3)
+        std::unique_ptr<AST> parseExpression();
+        // 10.20 | 10 | 1 etc.
         std::unique_ptr<AST> parseNumberExpression();
+        // a | b | simpleVariable
         std::unique_ptr<AST> parseWordExpression();
-        std::unique_ptr<AST> parseVariableInitExpression();
-        std::unique_ptr<AST> parseFunctionExpression();
+        // someVar<Type>
+        std::unique_ptr<AST> parseVariableDeclExpression();
+        // ( fn funcName )(params...) -> RetType ';'
+        std::unique_ptr<AST> parseFunctionDeclaration();
+        // ( fn funcName )(params...) -> RetType {...}
+        std::unique_ptr<AST> parseFunctionInitialization();
+        // obj [expr] {}
+        std::unique_ptr<AST> parseObjStatement();
 
         std::unique_ptr<AST> m_root;
         Tokenizer m_tokenizer;

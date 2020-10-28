@@ -105,6 +105,9 @@ namespace lang {
         if (sub.length()) {
             m_tokens.push_back(Token(sub, lineNumber));
         }
+
+        // initialize the iterator after tokenization
+        m_currentIterator = m_tokens.begin();
     }
 
     inline bool isDoubleToken(const std::string &INPUT, int pos)

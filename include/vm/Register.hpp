@@ -3,11 +3,7 @@
 namespace zinc {
 namespace vm {
     enum class RegisterType {
-        NATURAL = 0,
-        INTEGER,
-        RATIONAL,
-        REAL,
-        COMPLEX,
+        Unknown = 0,
     };
     class Register {
     public:
