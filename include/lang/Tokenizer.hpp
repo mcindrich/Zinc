@@ -10,7 +10,7 @@ namespace lang {
     class Tokenizer {
     public:
         Tokenizer();
-        void tokenize(std::string &input);
+        void tokenize(char *input);
 
     private:
         void splitIntoTokens(const std::string &INPUT);
