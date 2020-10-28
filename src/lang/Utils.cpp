@@ -4,25 +4,22 @@
 
 namespace zinc {
 namespace lang {
-    char *Utils::readFile(const std::string &file_name)
+    std::string Utils::readFile(const std::string &file_name)
     {
-        char *val = nullptr;
-        size_t flen = 0;
         std::ifstream file(file_name);
+        std::string str;
 
         if (!file.is_open()) {
             throw zinc::ex::InvalidFileException(file_name);
         }
 
         file.seekg(0, std::ios::end);
-        flen = file.tellg();
-        file.seekg(0);
+        str.reserve(file.tellg());
+        file.seekg(0, std::ios::beg);
 
-        val = new char[flen + 1];
-        file.read(val, flen);
-        val[flen] = 0;
-
-        return val;
+        str.assign((std::istreambuf_iterator<char>(file)),
+            std::istreambuf_iterator<char>());
+        return str;
     }
 }
 }
