@@ -6,7 +6,7 @@ namespace zinc {
 namespace lang {
     class Utils {
     public:
-        static char *readFile(const std::string &file_name);
+        static std::string readFile(const std::string &file_name);
     };
 }
 }

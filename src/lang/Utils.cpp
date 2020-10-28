@@ -1,13 +1,13 @@
 #include <lang/Utils.hpp>
 #include <ex/InvalidFileException.hpp>
 #include <fstream>
+#include <iostream>
 
 namespace zinc {
 namespace lang {
-    char *Utils::readFile(const std::string &file_name)
+    std::string Utils::readFile(const std::string &file_name)
     {
-        char *val = nullptr;
-        size_t flen = 0;
+        std::string str;
         std::ifstream file(file_name);
 
         if (!file.is_open()) {
@@ -15,14 +15,12 @@ namespace lang {
         }
 
         file.seekg(0, std::ios::end);
-        flen = file.tellg();
-        file.seekg(0);
+        str.reserve(file.tellg());
+        file.seekg(0, std::ios::beg);
 
-        val = new char[flen + 1];
-        file.read(val, flen);
-        val[flen] = 0;
-
-        return val;
+        str.assign((std::istreambuf_iterator<char>(file)),
+            std::istreambuf_iterator<char>());
+        return str;
     }
 }
 }
