@@ -22,7 +22,7 @@ namespace lang {
 
     inline bool isDoubleToken(const std::string &INPUT, int pos);
 
-    void Tokenizer::tokenize(std::string &input)
+    void Tokenizer::tokenize(char *input)
     {
         const std::string INPUT = input;
         splitIntoTokens(INPUT);

@@ -18,7 +18,6 @@ Program::Program(int argc, char **argv)
     }
 
     m_progName = argp.get<std::string>("fname");
-    std::cout << "File name: " << m_progName << std::endl;
 }
 
 int Program::run()

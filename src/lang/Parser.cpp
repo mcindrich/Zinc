@@ -9,21 +9,21 @@ namespace lang {
 
     void Parser::parseFile(const std::string &file_name)
     {
-        std::string content;
-
+        char *content = NULL;
         try {
             content = Utils::readFile(file_name);
         } catch (ex::InvalidFileException &ex) {
             std::cerr << ex.what() << std::endl;
         }
 
-        if (content.size()) {
+        if (content) {
             try {
                 m_tokenizer.tokenize(content);
                 formAST();
             } catch (std::runtime_error &ex) {
                 std::cerr << ex.what() << std::endl;
             }
+            delete[] content;
         }
     }
 
