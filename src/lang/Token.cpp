@@ -9,6 +9,11 @@ namespace lang {
             ++it;
         return !s.empty() && it == s.end();
     }
+    Token::Token()
+        : type(TokenType::None)
+        , lineNumber(-1)
+    {
+    }
 
     Token::Token(std::string &s, TokenType type, int ln)
         : value(s)

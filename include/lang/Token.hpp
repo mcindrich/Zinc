@@ -53,7 +53,7 @@ namespace lang {
         std::string value;
         TokenType type;
         int lineNumber;
-
+        Token();
         Token(std::string &s, TokenType type, int ln);
         Token(std::string &s, int ln);
         Token(char c, int ln);

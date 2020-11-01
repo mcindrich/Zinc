@@ -19,13 +19,10 @@ namespace lang {
         if (content.size()) {
             try {
                 m_tokenizer.tokenize(content);
-                formAST();
             } catch (std::runtime_error &ex) {
                 std::cerr << ex.what() << std::endl;
             }
         }
     }
-
-    void Parser::formAST() { }
 }
 }

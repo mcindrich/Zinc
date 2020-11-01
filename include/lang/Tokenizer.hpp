@@ -14,8 +14,8 @@ namespace lang {
 
     private:
         void splitIntoTokens(const std::string &INPUT);
-        std::list<Token> m_tokens;
 
+        std::list<Token> m_tokens;
         TokenIterator m_currentIterator;
     };
 }
