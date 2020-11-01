@@ -15,6 +15,6 @@ namespace lang {
 
     private:
         TokenType m_endingToken;
-    }
+    };
 }
 }

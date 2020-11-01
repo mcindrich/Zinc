@@ -12,6 +12,6 @@ namespace lang {
 
     private:
         TokenType m_tok;
-    }
+    };
 }
 }
