@@ -25,11 +25,20 @@ add_library(
 
 add_library(
   ZincLang
+
+  # basic files
   "src/lang/Utils.cpp"
   "src/lang/Compiler.cpp"
   "src/lang/Parser.cpp"
   "src/lang/Tokenizer.cpp"
   "src/lang/Token.cpp"
+
+  # pattern files
+
+  "src/lang/pattern/Pattern.cpp"
+  "src/lang/pattern/ExpressionPattern.cpp"
+  "src/lang/pattern/TokenPattern.cpp"
+  "src/lang/pattern/PatternList.cpp"
 
   # AST files
   "src/lang/ast/AST.cpp"

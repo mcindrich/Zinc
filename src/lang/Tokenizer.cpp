@@ -124,5 +124,8 @@ namespace lang {
         return ret;
     }
 
+    TokenIterator &Tokenizer::getIterator() { return m_currentIterator; }
+    TokenIterator Tokenizer::getEndingIterator() { return m_tokens.end(); }
+
 }
 }

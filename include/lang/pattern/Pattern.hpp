@@ -8,7 +8,6 @@ namespace lang {
     class Pattern {
     public:
         virtual bool matches(TokenIterator &start, TokenIterator &end) = 0;
-
         std::unique_ptr<AST> &getNode();
 
     protected:

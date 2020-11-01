@@ -13,6 +13,7 @@ namespace lang {
         void parseFile(const std::string &file_name);
 
     private:
+        void parseTokens();
         std::unique_ptr<AST> m_root;
         Tokenizer m_tokenizer;
     };

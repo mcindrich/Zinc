@@ -12,6 +12,9 @@ namespace lang {
         Tokenizer();
         void tokenize(std::string &input);
 
+        TokenIterator &getIterator();
+        TokenIterator getEndingIterator();
+
     private:
         void splitIntoTokens(const std::string &INPUT);
 
