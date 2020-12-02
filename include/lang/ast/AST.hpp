@@ -7,20 +7,24 @@
 
 namespace zinc {
 namespace lang {
+    // use for shorter names -> no need for the whole name every time
+    class AST;
+    using ASTPtr = std::unique_ptr<AST>;
+
     class AST {
     public:
         AST();
         AST(Token &tok, int nch);
 
-        void setChild(int n, std::unique_ptr<AST> node);
-        void setNext(std::unique_ptr<AST> node);
+        void setChild(int n, ASTPtr &node);
+        void setNext(ASTPtr &node);
 
-        virtual ~AST();
+        ~AST();
 
     private:
         Token m_token;
-        std::unique_ptr<AST> m_next;
-        std::vector<std::unique_ptr<AST>> m_children;
+        ASTPtr m_next;
+        std::vector<ASTPtr> m_children;
     };
 }
 }

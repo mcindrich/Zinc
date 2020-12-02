@@ -8,10 +8,9 @@ namespace lang {
         , m_children(nch)
     {
     }
-    void AST::setChild(int n, std::unique_ptr<AST> node)
-    {
-        m_children[n] = std::move(node);
-    }
-    void AST::setNext(std::unique_ptr<AST> node) { m_next = std::move(node); }
+    void AST::setChild(int n, ASTPtr &node) { m_children[n] = std::move(node); }
+    void AST::setNext(ASTPtr &node) { m_next = std::move(node); }
+
+    AST::~AST() {}
 }
 }
