@@ -4,6 +4,7 @@
 #include <lang/Token.hpp>
 #include <vector>
 #include <memory>
+#include <iostream>
 
 namespace zinc {
 namespace lang {
@@ -17,7 +18,14 @@ namespace lang {
         AST(Token &tok, int nch);
 
         void setChild(int n, ASTPtr &node);
+        ASTPtr &getChild(int n);
+
         void setNext(ASTPtr &node);
+        ASTPtr &getNext();
+
+        Token &getToken();
+
+        int getChildrenCount() const;
 
         ~AST();
 

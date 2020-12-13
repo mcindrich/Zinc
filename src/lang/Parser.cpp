@@ -29,7 +29,20 @@ namespace lang {
         }
     }
 
-    static inline void astPrint(std::unique_ptr<AST> &node, int ind) { }
+    static inline void AST_PRINT(std::unique_ptr<AST> &node, int ind)
+    {
+        if (!node) {
+            return;
+        }
+        for (int j = 0; j < ind; j++) {
+            std::cout << "  ";
+        }
+        std::cout << "- [" << node->getToken().value << "]" << std::endl;
+        for (int i = 0; i < node->getChildrenCount(); i++) {
+            AST_PRINT(node->getChild(i), ind + 1);
+        }
+        AST_PRINT(node->getNext(), ind);
+    }
 
     void Parser::parseTokens()
     {
@@ -39,8 +52,10 @@ namespace lang {
         PatternList pat_list({ &ep }, m_tokenizer.getIterator(),
             m_tokenizer.getEndingIterator());
 
-        if (pat_list.matches()) {
-            astPrint(ep.getNode(), 0);
+        bool mat = pat_list.matches();
+        std::cout << mat << std::endl;
+        if (mat) {
+            AST_PRINT(ep.getNode(), 0);
         }
     }
 }

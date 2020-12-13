@@ -43,6 +43,7 @@ add_library(
   # AST files
   "src/lang/ast/AST.cpp"
   "src/lang/ast/OperatorAST.cpp"
+  "src/lang/ast/OperandAST.cpp"
 )
 
 add_executable(
