@@ -1,0 +1,47 @@
+` comments
+
+` define namespace 
+namespace overview
+
+` importing:
+import std
+
+` enums
+enum EnumExample {
+    Red,
+    Green,
+    Blue
+}
+
+` objects
+obj ObjExample {
+    a type Int32
+    b type Int32
+    name type String
+}
+
+` object with methods
+obj MethodObject {
+    v type ObjExample
+
+    ` "#"__TYPE__ => pointer upitnik?
+    fn constructor(a type ObjExample) -> #Void {
+        v = a
+    }
+
+    fn doSomething() -> Int32 {
+        ret v.a + v.b
+    }
+}
+
+` functions
+fn exampleFunction(a type Int32) {
+    std.println(a.toString())
+}
+
+` executables -> main
+
+fn main(argc type Int32, argv type String[]) -> Int32 {
+    
+    ret 0
+}

@@ -3,7 +3,7 @@
 namespace zinc {
 namespace lang {
     OperandAST::OperandAST(Token &tok)
-        : AST(tok, 0)
+        : AST(tok, ASTType::Operand, 0)
     {
     }
 }

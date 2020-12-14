@@ -17,10 +17,7 @@ namespace lang {
     bool ExpressionPattern::matches(TokenIterator &beg, TokenIterator &end)
     {
         bool retval = true;
-        // use copies instead of references in case some patterns don't match ->
-        // normally getting back to the last point and no need to reverse the
-        // referenced iterator
-        TokenIterator it = beg;
+        TokenIterator &it = beg;
 
         std::stack<Token> op_stack;
         std::stack<ASTPtr> expr_stack;
@@ -64,7 +61,8 @@ namespace lang {
             } else {
                 // check for all patterns
                 // testing: use only numbers
-                if (it->type == TokenType::Number) {
+                if (it->type == TokenType::Number
+                    || it->type == TokenType::Word) {
                     expr_stack.push(ASTPtr(new OperandAST(*it)));
                 } else {
                     retval = false;
@@ -94,6 +92,9 @@ namespace lang {
             m_node = std::move(expr_stack.top());
             expr_stack.pop();
         }
+
+        // move over ending token
+        ++it;
         return retval;
     }
 }

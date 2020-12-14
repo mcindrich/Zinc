@@ -14,7 +14,7 @@ namespace lang {
 
     private:
         void parseTokens();
-        std::unique_ptr<AST> m_root;
+        ASTPtr m_root;
         Tokenizer m_tokenizer;
     };
 }

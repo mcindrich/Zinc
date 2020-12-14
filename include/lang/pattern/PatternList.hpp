@@ -8,14 +8,14 @@ namespace zinc {
 namespace lang {
     class PatternList {
     public:
-        PatternList(std::initializer_list<Pattern *> pl, TokenIterator &curr,
-            TokenIterator end);
+        PatternList(std::initializer_list<Pattern *> pl);
 
-        bool matches();
+        bool matches(TokenIterator &curr, TokenIterator end);
+
+        Pattern *getPattern(int idx) const;
 
     private:
-        std::list<Pattern *> m_patterns;
-        TokenIterator &m_currIterator, m_endIterator;
+        std::vector<Pattern *> m_patterns;
     };
 }
 }
