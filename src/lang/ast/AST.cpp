@@ -8,14 +8,14 @@ namespace lang {
         , m_type(type)
     {
         if (nch > 0) {
-            m_children.reserve(nch);
+            for (int i = 0; i < nch; i++) {
+                m_children.push_back(ASTPtr(nullptr));
+            }
+            // m_children.reserve(nch);
         }
     }
 
-    void AST::setChild(int n, ASTPtr &node)
-    {
-        m_children.push_back(std::move(node));
-    }
+    void AST::setChild(int n, ASTPtr &node) { m_children[n] = std::move(node); }
     ASTPtr &AST::getChild(int n) { return m_children[n]; }
 
     void AST::setNext(ASTPtr &node) { m_next = std::move(node); }

@@ -41,6 +41,7 @@ namespace lang {
                             ASTPtr(new OperatorAST(op, left, right)));
                     }
                 }
+                op_stack.pop();
             } else if (IS_OPERATOR(it->type)) {
                 while (op_stack.size() && op_stack.top().type >= it->type) {
                     Token op = op_stack.top();

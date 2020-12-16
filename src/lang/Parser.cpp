@@ -40,7 +40,7 @@ namespace lang {
         for (int j = 0; j < ind; j++) {
             std::cout << "  ";
         }
-        std::cout << "- [\"" << node->getToken().value << "\"]" << std::endl;
+        std::cout << "- [\"" << node->getToken().value << "\"]:" << std::endl;
         for (int i = 0; i < node->getChildrenCount(); i++) {
             AST_PRINT(node->getChild(i), ind + 1);
         }
@@ -64,7 +64,7 @@ namespace lang {
 
         // token patterns => match keywords and stuff like that
         TokenPattern obj_tp(TokenType::Object, ASTType::ObjectDef, 2);
-        TokenPattern func_tp(TokenType::Function, ASTType::FunctionDef, 3);
+        TokenPattern func_tp(TokenType::Function, ASTType::FunctionDef, 4);
         TokenPattern if_tp(TokenType::If, ASTType::If, 2);
         TokenPattern else_tp(TokenType::Else, ASTType::Else, 1);
         TokenPattern for_tp(TokenType::For, ASTType::For, 1);
@@ -72,27 +72,27 @@ namespace lang {
         TokenPattern import_tp(TokenType::Import, ASTType::Import, 1);
 
         // block parts
-        TokenPattern block_start_tp(TokenType::LBrace, ASTType::Basic, 1);
-        TokenPattern block_end_tp(TokenType::RBrace, ASTType::Basic, 1);
-
-        // use for parsing blocks of data
-        std::stack<ASTPtr> node_stack;
+        TokenPattern block_start_tp(TokenType::LBrace, ASTType::Basic, 0);
+        TokenPattern block_end_tp(TokenType::RBrace, ASTType::Basic, 0);
 
         // build pattern list vector
-        std::vector<PatternList> pl_vec;
-
-        // object definition
-        pl_vec.push_back(PatternList({ &obj_tp, &ep_lbrace }));
-        // function definition
-        pl_vec.push_back(PatternList({ &func_tp, &word_tp, &ep_lbrace }));
-        // import
-        pl_vec.push_back(PatternList({ &import_tp, &ep_newline }));
-        // block start
-        pl_vec.push_back(PatternList({ &block_start_tp }));
-        // block end
-        pl_vec.push_back(PatternList({ &block_end_tp }));
-        // expression pattern list
-        pl_vec.push_back(PatternList({ &ep_newline }));
+        std::vector<PatternList> pl_vec({
+            // types
+            // object definition
+            PatternList({ &obj_tp, &ep_lbrace }),
+            // function definition
+            PatternList({ &func_tp, &word_tp, &ep_lbrace }),
+            // import definition
+            PatternList({ &import_tp, &ep_newline }),
+            // end block
+            PatternList({ &block_end_tp }),
+            // if statement
+            PatternList({ &if_tp, &ep_lbrace }),
+            // else statement
+            PatternList({ &else_tp, &block_start_tp }),
+            // simple expression goes last => check after all others
+            PatternList({ &ep_newline }),
+        });
 
         TokenIterator curr = m_tokenizer.getIterator();
         TokenIterator end = m_tokenizer.getEndingIterator();
@@ -100,27 +100,76 @@ namespace lang {
         bool root_init = false;
         bool done = false;
 
-        ASTPtr tmp_node;
+        // use for parsing blocks of data
+        std::stack<ASTPtr *> node_stack;
+        // current node following AST position
+        ASTPtr *tmp_node = &m_root;
 
         while (curr != end) {
+            bool pattern_found = true;
             for (PatternList &pl : pl_vec) {
                 if (pl.matches(curr, end)) {
-                    ASTType first_nt = pl.getPattern(0)->getNode()->getType();
+                    auto first_nt = pl.getPattern(0)->getNode()->getType();
 
                     switch (first_nt) {
                     case ASTType::Import:
-                        tmp_node = std::move(pl.getPattern(0)->getNode());
-                        tmp_node->setChild(0, pl.getPattern(1)->getNode());
+                        *tmp_node = std::move(pl.getPattern(0)->getNode());
+                        (*tmp_node)->setChild(0, pl.getPattern(1)->getNode());
+                        tmp_node = &(*tmp_node)->getNext();
+                        break;
+                    case ASTType::If:
+                        // push current to stack
+                        *tmp_node = std::move(pl.getPattern(0)->getNode());
+                        (*tmp_node)->setChild(0, pl.getPattern(1)->getNode());
+                        node_stack.push(tmp_node);
+                        tmp_node = &(*tmp_node)->getChild(1);
+                        break;
+                    case ASTType::Else:
+                        break;
+                    case ASTType::ObjectDef:
+                        *tmp_node = std::move(pl.getPattern(0)->getNode());
+                        (*tmp_node)->setChild(0, pl.getPattern(1)->getNode());
+                        node_stack.push(tmp_node);
+                        tmp_node = &(*tmp_node)->getChild(1);
+                        break;
+                    case ASTType::FunctionDef:
+                        *tmp_node = std::move(pl.getPattern(0)->getNode());
+                        (*tmp_node)->setChild(0, pl.getPattern(1)->getNode());
+                        (*tmp_node)->setChild(1, pl.getPattern(2)->getNode());
+                        node_stack.push(tmp_node);
+                        tmp_node = &(*tmp_node)->getChild(3);
+                        break;
+                        break;
+                    case ASTType::Basic: {
+                        // check if its the right brace => ending block
+                        auto tt = pl.getPattern(0)->getNode()->getToken().type;
+                        if (tt == TokenType::RBrace) {
+                            // block ending
+                            tmp_node = node_stack.top();
+                            node_stack.pop();
+                            tmp_node = &(*tmp_node)->getNext();
+                        }
+                        break;
+                    }
+                    case ASTType::Operator:
+                        // expression
+                        *tmp_node = std::move(pl.getPattern(0)->getNode());
+                        tmp_node = &(*tmp_node)->getNext();
                         break;
                     default:
+                        pattern_found = false;
                         break;
                     }
                     // found pattern => parse further
                     break;
                 }
             }
+            if (!pattern_found) {
+                // error on curr->line
+                break;
+            }
         }
-        AST_PRINT(tmp_node, 0);
+        AST_PRINT(m_root, 0);
     }
 }
 }

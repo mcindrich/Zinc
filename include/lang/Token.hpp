@@ -28,13 +28,10 @@ namespace lang {
         // operators and separators
         OP_START,
         Semicolon,
+        Comma,
+        Pointer, // ->
         Colon,
         Dot,
-        Comma,
-        Plus,
-        Minus,
-        Star,
-        Slash,
         LT,
         GT,
         LTE,
@@ -42,10 +39,14 @@ namespace lang {
         EQ, // ==
         ShiftL,
         ShiftR,
-        Pointer, // ->
         Equal, // =
+        Plus,
+        Minus,
+        Star,
+        Slash,
         OP_END,
         // keywords
+        KW_START,
         Enum,
         Object,
         Function,
@@ -53,7 +54,8 @@ namespace lang {
         Else,
         For,
         Module,
-        Import
+        Import,
+        KW_END
     };
     struct Token {
         std::string value;
