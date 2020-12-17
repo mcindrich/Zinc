@@ -28,7 +28,7 @@ namespace lang {
         // check for keywords etc.
         if (s == "import") {
             type = TokenType::Import;
-        } else if (s == "obj") {
+        } else if (s == "object") {
             type = TokenType::Object;
         } else if (s == "fn") {
             type = TokenType::Function;
@@ -38,10 +38,14 @@ namespace lang {
             type = TokenType::Else;
         } else if (s == "for") {
             type = TokenType::For;
-        } else if (s == "mod") {
-            type = TokenType::Module;
+        } else if (s == "namespace") {
+            type = TokenType::Namespace;
         } else if (s == "enum") {
             type = TokenType::Enum;
+        } else if (s == "type") {
+            type = TokenType::TypeOP;
+        } else if (s == "return") {
+            type = TokenType::Return;
         } else if (s == "->") {
             type = TokenType::Pointer;
         } else if (isNumber(s)) {

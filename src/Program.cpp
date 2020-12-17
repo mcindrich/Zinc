@@ -27,9 +27,6 @@ int Program::run()
     } catch (std::runtime_error &ex) {
         std::cerr << ex.what() << std::endl;
     }
-    // TODO: prepare VM for execution -> init memory etc.
-    m_vm.execute(m_compiler.getInstructions());
-
     return 0;
 }
 }

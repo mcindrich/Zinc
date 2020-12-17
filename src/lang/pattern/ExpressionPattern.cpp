@@ -62,8 +62,11 @@ namespace lang {
             } else {
                 // check for all patterns
                 // testing: use only numbers
-                if (it->type == TokenType::Number
-                    || it->type == TokenType::Word) {
+                if (it->type == TokenType::Number) {
+                    expr_stack.push(ASTPtr(new OperandAST(*it)));
+                } else if (it->type == TokenType::Word) {
+                    // for now just push => TODO: add function and other pattern
+                    // checkings like simpleFunction(...)
                     expr_stack.push(ASTPtr(new OperandAST(*it)));
                 } else {
                     retval = false;

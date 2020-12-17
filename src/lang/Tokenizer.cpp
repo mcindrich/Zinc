@@ -12,7 +12,8 @@
 #define ZINC_LAST_TYPE_NEWLINE(t)                                              \
     (t == TokenType::Newline                                                   \
         || (t > TokenType::PARENTH_START && t < TokenType::PARENTH_END)        \
-        || (t > TokenType::KW_START && t < TokenType::KW_END))
+        || (t > TokenType::KW_START && t < TokenType::KW_END)                  \
+        || t == TokenType::Comma)
 #define ZINC_LEXER_DBG
 
 #ifdef ZINC_LEXER_DBG
@@ -92,11 +93,12 @@ namespace lang {
                             m_tokens.push_back(Token(INPUT[i], lineNumber));
                         }
                     } else {
-                        if (INPUT[i] == '\n'
-                            && !ZINC_LAST_TYPE_NEWLINE(m_tokens.back().type)) {
-                            sub = "NEW_LINE";
-                            m_tokens.push_back(
-                                Token(sub, TokenType::Newline, lineNumber));
+                        if (INPUT[i] == '\n') {
+                            if (!ZINC_LAST_TYPE_NEWLINE(m_tokens.back().type)) {
+                                sub = "[NEW_LINE]";
+                                m_tokens.push_back(
+                                    Token(sub, TokenType::Newline, lineNumber));
+                            }
                             ++lineNumber;
                         }
                     }

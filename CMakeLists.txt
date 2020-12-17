@@ -16,11 +16,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
   ZincVM
-  "src/vm/VirtualMachine.cpp"
-  "src/vm/CPU.cpp"
+  
   "src/vm/Instruction.cpp"
-  "src/vm/Memory.cpp"
-  "src/vm/Register.cpp"
 )
 
 add_library(

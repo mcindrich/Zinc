@@ -1,7 +1,6 @@
 #pragma once
 
 #include <lang/Compiler.hpp>
-#include <vm/VirtualMachine.hpp>
 #include <argparse/argparse.hpp>
 // class for compiling the source and giving the instructions to the vm for
 // execution
@@ -19,8 +18,6 @@ private:
     // program name to compile and execute
     std::string m_progName;
 
-    // compiler and a VM
     lang::Compiler m_compiler;
-    vm::VirtualMachine m_vm;
 };
 }

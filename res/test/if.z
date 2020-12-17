@@ -1,3 +1,9 @@
-fn simple a : Int32, b : Int32 -> Int32 {
-    import std.string
+enum Simple {
+    Red,
+    Green,
+    Blue
+}
+fn simple(a type Int32, b type Int32) : Int32 {
+    a type Int32 = 20 * 30
+    return a
 }

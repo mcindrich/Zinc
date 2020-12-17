@@ -44,6 +44,7 @@ namespace lang {
         Minus,
         Star,
         Slash,
+        TypeOP,
         OP_END,
         // keywords
         KW_START,
@@ -53,8 +54,9 @@ namespace lang {
         If,
         Else,
         For,
-        Module,
+        Namespace,
         Import,
+        Return,
         KW_END
     };
     struct Token {
