@@ -14,7 +14,7 @@ enum EnumExample {
 }
 
 ` objects
-obj ObjExample {
+object ObjExample {
     a type Int32
     b type Int32
     name type String
