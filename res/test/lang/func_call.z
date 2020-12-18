@@ -1,0 +1,6 @@
+fn simpleFunction(b type Int32) -> Int32 {
+    return b * 20
+}
+
+
+a = simpleFunction(20 + 30 * (10 - 20)) + 20

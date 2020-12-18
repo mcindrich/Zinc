@@ -1,4 +1,6 @@
+#include "lang/pattern/TokenPattern.hpp"
 #include <lang/pattern/ExpressionPattern.hpp>
+#include <lang/pattern/PatternList.hpp>
 #include <lang/ast/OperatorAST.hpp>
 #include <lang/ast/OperandAST.hpp>
 #include <stack>
@@ -28,6 +30,25 @@ namespace lang {
             } else if (it->type == TokenType::RParenth) {
                 while (op_stack.size()
                     && op_stack.top().type != TokenType::LParenth) {
+                    Token op = op_stack.top();
+                    op_stack.pop();
+                    if (expr_stack.size() < 2) {
+                        break;
+                    } else {
+                        ASTPtr right = std::move(expr_stack.top());
+                        expr_stack.pop();
+                        ASTPtr left = std::move(expr_stack.top());
+                        expr_stack.pop();
+                        expr_stack.push(
+                            ASTPtr(new OperatorAST(op, left, right)));
+                    }
+                }
+                op_stack.pop();
+            } else if (it->type == TokenType::LBracket) {
+                op_stack.push(*it);
+            } else if (it->type == TokenType::RBracket) {
+                while (op_stack.size()
+                    && op_stack.top().type != TokenType::LBracket) {
                     Token op = op_stack.top();
                     op_stack.pop();
                     if (expr_stack.size() < 2) {
