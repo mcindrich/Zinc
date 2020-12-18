@@ -1,5 +1,6 @@
 #include "lang/pattern/TokenPattern.hpp"
 #include <lang/pattern/ExpressionPattern.hpp>
+#include <lang/pattern/FunctionCallPattern.hpp>
 #include <lang/pattern/PatternList.hpp>
 #include <lang/ast/OperatorAST.hpp>
 #include <lang/ast/OperandAST.hpp>
@@ -23,6 +24,9 @@ namespace lang {
 
         std::stack<Token> op_stack;
         std::stack<ASTPtr> expr_stack;
+
+        // watch for functions when the word appears
+        FunctionCallPattern fcp;
 
         while (it != end && it->type != m_endingToken) {
             if (it->type == TokenType::LParenth) {
@@ -88,7 +92,15 @@ namespace lang {
                 } else if (it->type == TokenType::Word) {
                     // for now just push => TODO: add function and other pattern
                     // checkings like simpleFunction(...)
-                    expr_stack.push(ASTPtr(new OperandAST(*it)));
+
+                    // std::cout << "WORD: " << it->value << std::endl;
+                    if (fcp.matches(it, end)) {
+                        // fcp.getNode()->print(0);
+                        expr_stack.push(std::move(fcp.getNode()));
+                        continue;
+                    } else {
+                        expr_stack.push(ASTPtr(new OperandAST(*it)));
+                    }
                 } else {
                     retval = false;
                     break;
@@ -118,8 +130,10 @@ namespace lang {
             expr_stack.pop();
         }
 
-        // move over ending token
-        ++it;
+        // move over ending token if not already parsed everything
+        if (it != end) {
+            ++it;
+        }
         return retval;
     }
 }

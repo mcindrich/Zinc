@@ -34,6 +34,7 @@ add_library(
 
   "src/lang/pattern/Pattern.cpp"
   "src/lang/pattern/ExpressionPattern.cpp"
+  "src/lang/pattern/FunctionCallPattern.cpp"
   "src/lang/pattern/TokenPattern.cpp"
   "src/lang/pattern/PatternList.cpp"
 

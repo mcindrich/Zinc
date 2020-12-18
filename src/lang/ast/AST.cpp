@@ -11,7 +11,22 @@ namespace lang {
             for (int i = 0; i < nch; i++) {
                 m_children.push_back(ASTPtr(nullptr));
             }
-            // m_children.reserve(nch);
+        }
+    }
+
+    void AST::print(int ind)
+    {
+        for (int j = 0; j < ind; j++) {
+            std::cout << "  ";
+        }
+        std::cout << "> [\"" << getToken().value << "\"]" << std::endl;
+        for (int i = 0; i < getChildrenCount(); i++) {
+            if (getChild(i)) {
+                getChild(i)->print(ind + 1);
+            }
+        }
+        if (getNext()) {
+            getNext()->print(ind);
         }
     }
 

@@ -1,6 +1,6 @@
-fn simpleFunction(b type Int32) -> Int32 {
-    return b * 20
+fn simpleFunction(a type Int32, b type Int32) -> Int32 {
+    return a + b * b
 }
 
 
-a = simpleFunction(20 + 30 * (10 - 20)) + 20
+a = simpleFunction(10, 20) + 20

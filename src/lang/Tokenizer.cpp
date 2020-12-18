@@ -1,3 +1,4 @@
+#include "lang/Token.hpp"
 #include <lang/Tokenizer.hpp>
 #define ZINC_IS_DELIM(c)                                                       \
     (c == '#' || c == '^' || c == '$' || c == '=' || c == '-' || c == '+'      \
@@ -94,7 +95,9 @@ namespace lang {
                         }
                     } else {
                         if (INPUT[i] == '\n') {
-                            if (!ZINC_LAST_TYPE_NEWLINE(m_tokens.back().type)) {
+                            if (m_tokens.size()
+                                && !ZINC_LAST_TYPE_NEWLINE(
+                                    m_tokens.back().type)) {
                                 sub = "[NEW_LINE]";
                                 m_tokens.push_back(
                                     Token(sub, TokenType::Newline, lineNumber));
@@ -112,6 +115,10 @@ namespace lang {
         }
 
         // initialize the iterator after tokenization
+        if (m_tokens.back().type != TokenType::Newline) {
+            sub = "[NEW_LINE]";
+            m_tokens.push_back(Token(sub, TokenType::Newline, lineNumber));
+        }
         m_currentIterator = m_tokens.begin();
     }
 

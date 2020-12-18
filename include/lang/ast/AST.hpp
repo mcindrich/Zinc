@@ -39,6 +39,8 @@ namespace lang {
         void setChild(int n, ASTPtr &node);
         ASTPtr &getChild(int n);
 
+        void print(int ind);
+
         void setNext(ASTPtr &node);
         ASTPtr &getNext();
 

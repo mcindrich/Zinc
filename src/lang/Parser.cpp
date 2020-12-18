@@ -1,3 +1,4 @@
+#include "lang/Token.hpp"
 #include "lang/Tokenizer.hpp"
 #include "lang/ast/AST.hpp"
 #include <lang/Parser.hpp>
@@ -121,6 +122,10 @@ namespace lang {
 
         while (curr != end) {
             bool pattern_found = true;
+            if (curr->type == TokenType::Newline) {
+                ++curr;
+                continue;
+            }
             for (PatternList &pl : pl_vec) {
                 if (pl.matches(curr, end)) {
                     auto first_nt = pl.getPattern(0)->getNode()->getType();

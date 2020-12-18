@@ -13,6 +13,7 @@ namespace lang {
     {
         bool retval = true;
         TokenIterator beg_tmp = beg;
+        TokenIterator parsed_correctly;
 
         // check for first token being word like 'simpleFunction'
         TokenPattern word_tp(TokenType::Word, ASTType::Basic, 1);
@@ -22,19 +23,20 @@ namespace lang {
             // move created AST node into root of this pattern node
             m_node = std::move(word_tp.getNode());
             std::stack<TokenType> parenth_stack;
-            std::list<Token> tmp_tokens;
+            std::vector<Token> tmp_tokens;
 
             // now go from beg to end, if end reached => error, use stack for
             // parenthesis and check when matched last one
 
             if (beg_tmp->type == TokenType::LParenth) {
                 parenth_stack.push(beg_tmp->type);
+                tmp_tokens.push_back(*beg_tmp);
                 beg_tmp++;
 
                 // until last parenthesis found iterate and create new list of
                 // tokens
 
-                while (beg_tmp != end && parenth_stack.size()
+                while (beg_tmp != end && parenth_stack.size() > 0
                     && beg_tmp->type != TokenType::Newline) {
                     if (beg_tmp->type == TokenType::RParenth) {
                         parenth_stack.pop();
@@ -69,7 +71,7 @@ namespace lang {
             // if all parsed correctly => move iterator to correct position
             // if not => iterator will stay at the same spot for further parsing
             // and analysis
-            beg = beg_tmp;
+            beg = beg_tmp++;
         }
         return retval;
     }
