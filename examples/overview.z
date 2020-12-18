@@ -21,16 +21,11 @@ obj ObjExample {
 }
 
 ` object with methods
-obj MethodObject {
+object MethodObject {
     v type ObjExample
 
-    ` "#"__TYPE__ => pointer upitnik?
-    fn constructor(a type ObjExample) -> #Void {
-        v = a
-    }
-
     fn doSomething() -> Int32 {
-        ret v.a + v.b
+        return v.a + v.b
     }
 }
 
@@ -43,5 +38,5 @@ fn exampleFunction(a type Int32) {
 
 fn main(argc type Int32, argv type String[]) -> Int32 {
     
-    ret 0
+    return 0
 }

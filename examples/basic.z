@@ -1,8 +1,0 @@
-namespace basic
-
-import std
-
-fn printInt(a type Int32) -> #Void {
-    std.println("a = " + a.toString())
-    ret null
-}
