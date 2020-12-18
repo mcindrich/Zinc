@@ -71,9 +71,6 @@ namespace lang {
                     int curr = i + 1;
                     for (++i; i < INPUT.length() && INPUT[i] != '\n'; ++i)
                         ;
-                    sub = INPUT.substr(curr, i - curr);
-                    m_tokens.push_back(
-                        Token(sub, TokenType::Comment, lineNumber));
                     ++lineNumber;
                 } else {
                     sub = INPUT.substr(lastToken, i - lastToken);
