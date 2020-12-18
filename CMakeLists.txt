@@ -15,13 +15,13 @@ include_directories(
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
-  ZincVM
+  zinc_vm
   
   "src/vm/Instruction.cpp"
 )
 
 add_library(
-  ZincLang
+  zinc_lang
 
   # basic files
   "src/lang/Utils.cpp"
@@ -45,12 +45,12 @@ add_library(
 )
 
 add_executable(
-  Zinc
+  zinc
   "src/main.cpp"
   "src/Program.cpp"
 )
 
-target_link_libraries(Zinc ZincVM ZincLang)
+target_link_libraries(zinc zinc_vm zinc_lang)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
