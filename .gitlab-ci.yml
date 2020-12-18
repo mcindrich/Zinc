@@ -1,0 +1,16 @@
+stages:
+  - build
+
+before_script:
+  - pacman -Sy --needed --noconfirm base-devel clang cmake cmocka llvm
+
+build:
+  stage: build
+  script:
+    - mkdir build
+    - cmake -DCMAKE_CXX_COMPILER=clang -S . -B build
+    - cd build
+    - make
+  artifacts:
+    paths:
+      - build/
