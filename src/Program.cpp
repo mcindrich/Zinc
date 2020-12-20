@@ -24,6 +24,7 @@ int Program::run()
 {
     try {
         m_compiler.compile(m_progName);
+        m_vm.execute(m_compiler.getInstructions());
     } catch (std::runtime_error &ex) {
         std::cerr << ex.what() << std::endl;
     }

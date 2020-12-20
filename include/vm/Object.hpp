@@ -1,13 +1,23 @@
 #pragma once
 
-#include <memory>
-
 namespace zinc {
 namespace vm {
-    class Object {
+    enum class ObjectType {
+        Unknown = 0,
+        Object,
+        Enum,
+        Function,
+        Namespace,
+    };
 
-    private:
-        std::unique_ptr<void> m_priv;
+    class Object {
+    public:
+        Object();
+        Object(ObjectType type);
+
+    protected:
+        void *m_priv;
+        ObjectType m_type;
     };
 }
 }

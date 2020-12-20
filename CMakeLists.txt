@@ -18,6 +18,8 @@ add_library(
   zinc_vm
   
   "src/vm/Instruction.cpp"
+  "src/vm/VirtualMachine.cpp"
+  "src/vm/Object.cpp"
 )
 
 add_library(
