@@ -3,14 +3,17 @@
 namespace zinc {
 namespace vm {
     enum class Opcode : unsigned char {
-        None,
+        None = 0,
         Move,
         Load,
         Store,
         Add,
         Sub,
         Mul,
-        Div
+        Div,
+        Jump,
+        Call,
+        Ret,
     };
 }
 }

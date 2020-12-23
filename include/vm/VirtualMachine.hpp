@@ -5,7 +5,7 @@
 #include <vm/Object.hpp>
 #include <list>
 
-#define REG_COUNT 32
+#define REG_COUNT 16
 
 namespace zinc {
 namespace vm {
@@ -13,11 +13,11 @@ namespace vm {
     public:
         VirtualMachine();
 
-        void execute(std::list<Instruction> &in);
+        void execute(std::vector<Instruction> &in);
 
     private:
         // vm specific stuff
-        std::list<Instruction> m_instructions;
+        std::vector<Instruction> m_instructions;
         Object m_registers[REG_COUNT];
     };
 }

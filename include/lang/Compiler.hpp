@@ -18,7 +18,7 @@ namespace lang {
         // compile using a parser and generate instructions from AST nodes
         Parser m_parser;
         // instructions to be generated
-        std::list<vm::Instruction> m_instructions;
+        std::vector<vm::Instruction> m_instructions;
     };
 }
 }

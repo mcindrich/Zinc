@@ -7,7 +7,7 @@ namespace lang {
     {
         m_parser.parseFile(prog_name);
     }
-    std::list<vm::Instruction> &Compiler::getInstructions()
+    std::vector<vm::Instruction> &Compiler::getInstructions()
     {
         return m_instructions;
     }
