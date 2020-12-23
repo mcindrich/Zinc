@@ -15,14 +15,6 @@ include_directories(
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
-  zinc_vm
-  
-  "src/vm/Instruction.cpp"
-  "src/vm/VirtualMachine.cpp"
-  "src/vm/Object.cpp"
-)
-
-add_library(
   zinc_lang
 
   # basic files
@@ -52,7 +44,7 @@ add_executable(
   "src/Program.cpp"
 )
 
-target_link_libraries(zinc zinc_vm zinc_lang)
+target_link_libraries(zinc zinc_lang)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
