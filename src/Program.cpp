@@ -4,7 +4,7 @@
 namespace zinc {
 Program::Program(int argc, char **argv)
 {
-    argparse::ArgumentParser argp("Zinc");
+    argparse::ArgumentParser argp("zinc");
     argp.add_argument("fname")
         .help("file name of a program to run")
         .action([](const std::string &value) { return value; });
