@@ -13,6 +13,7 @@
 
 namespace zinc {
 namespace lang {
+
     Parser::Parser() { }
 
     void Parser::parseFile(const std::string &file_name)
@@ -42,8 +43,10 @@ namespace lang {
         for (int j = 0; j < ind; j++) {
             std::cout << "  ";
         }
-        std::cout << "> {" << (int)node->getType() << "}: [\""
-                  << node->getToken().value << "\"]" << std::endl;
+        std::cout << "> "
+                  << " [\"" << node->getToken().value
+                  << "\" : " << ASTTypeNameMap[(int)node->getType()] << "]"
+                  << std::endl;
         for (int i = 0; i < node->getChildrenCount(); i++) {
             AST_PRINT(node->getChild(i), ind + 1);
         }

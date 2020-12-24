@@ -2,9 +2,9 @@
 
 // AST node class
 #include <Token.h>
-#include <vector>
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <vector>
 
 namespace zinc {
 namespace lang {
@@ -29,6 +29,26 @@ namespace lang {
         Else,
         For,
         While,
+    };
+
+    // used for debugging and possibly in the future for error messages
+    inline const char *ASTTypeNameMap[] = {
+        "ASTType::Unknown",
+        "ASTType::Basic",
+        "ASTType::Operand",
+        "ASTType::Operator",
+        "ASTType::VariableDef",
+        "ASTType::ObjectDef",
+        "ASTType::EnumDef",
+        "ASTType::FunctionDef",
+        "ASTType::FunctionCall",
+        "ASTType::Return",
+        "ASTType::Import",
+        "ASTType::Namespace",
+        "ASTType::If",
+        "ASTType::Else",
+        "ASTType::For",
+        "ASTType::While",
     };
 
     class AST {
@@ -57,5 +77,5 @@ namespace lang {
         ASTPtr m_next;
         std::vector<ASTPtr> m_children;
     };
-}
-}
+} // namespace lang
+} // namespace zinc

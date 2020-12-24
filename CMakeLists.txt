@@ -13,7 +13,10 @@ include_directories(
 
 # for settings and intellisense
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# compiler specific flags
 SET(CMAKE_CXX_FLAGS  "-fstandalone-debug")
+add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 add_library(
   zinc_lang

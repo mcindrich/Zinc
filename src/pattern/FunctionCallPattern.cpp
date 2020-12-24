@@ -13,7 +13,6 @@ namespace lang {
     {
         bool retval = true;
         TokenIterator beg_tmp = beg;
-        TokenIterator parsed_correctly;
 
         // check for first token being word like 'simpleFunction'
         TokenPattern word_tp(TokenType::Word, ASTType::Basic, 1);

@@ -15,6 +15,7 @@
         || (t > TokenType::PARENTH_START && t < TokenType::PARENTH_END)        \
         || (t > TokenType::KW_START && t < TokenType::KW_END)                  \
         || t == TokenType::Comma)
+
 #define ZINC_LEXER_DBG
 
 #ifdef ZINC_LEXER_DBG
@@ -47,12 +48,12 @@ namespace lang {
         int lastToken = 0, lineNumber = 1;
         std::string sub;
 
-        for (int i = 0; i < INPUT.length(); i++) {
+        for (unsigned long i = 0; i < INPUT.length(); i++) {
             if (ZINC_IS_DELIM(INPUT[i])) {
                 // first check for string and a comment
                 if (INPUT[i] == '\"') {
                     // read string
-                    int j = i + 1;
+                    unsigned long j = i + 1;
                     lastToken = i + 1;
                     for (; j < INPUT.length(); j++) {
                         if (INPUT[j] == '\"') {
@@ -68,7 +69,6 @@ namespace lang {
                     i = j;
                 } else if (INPUT[i] == '`') {
                     // comment, ignore the line
-                    int curr = i + 1;
                     for (++i; i < INPUT.length() && INPUT[i] != '\n'; ++i)
                         ;
                     ++lineNumber;

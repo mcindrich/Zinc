@@ -55,8 +55,8 @@ namespace lang {
         }
     }
     Token::Token(char c, int ln)
-        : lineNumber(ln)
-        , value(1, c)
+        : value(1, c)
+        , lineNumber(ln)
     {
         switch (c) {
         case '.':

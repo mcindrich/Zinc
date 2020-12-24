@@ -12,7 +12,7 @@ namespace lang {
     bool TokenPattern::matches(TokenIterator &beg, TokenIterator &end)
     {
         bool retval = false;
-        if (beg->type == m_tok) {
+        if (beg != end && beg->type == m_tok) {
             // token matches => set to true and create node for later use
             // also update iterator
             m_node = ASTPtr(new AST(*beg, m_ast_type, m_nch));
