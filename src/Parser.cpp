@@ -211,6 +211,12 @@ namespace lang {
                         *tmp_node = std::move(pl.getPattern(0)->getNode());
                         tmp_node = &(*tmp_node)->getNext();
                         break;
+                    case ASTType::FunctionCall:
+                        // function call only : example => simpleFunction(20,
+                        // 30)
+                        *tmp_node = std::move(pl.getPattern(0)->getNode());
+                        tmp_node = &(*tmp_node)->getNext();
+                        break;
                     default:
                         pattern_found = false;
                         break;

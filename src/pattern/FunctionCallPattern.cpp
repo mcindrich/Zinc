@@ -15,7 +15,7 @@ namespace lang {
         TokenIterator beg_tmp = beg;
 
         // check for first token being word like 'simpleFunction'
-        TokenPattern word_tp(TokenType::Word, ASTType::Basic, 1);
+        TokenPattern word_tp(TokenType::Word, ASTType::FunctionCall, 1);
         ExpressionPattern ep(TokenType::Newline);
 
         if (word_tp.matches(beg_tmp, end)) {
