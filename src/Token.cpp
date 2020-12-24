@@ -30,7 +30,7 @@ namespace lang {
             type = TokenType::Import;
         } else if (s == "object") {
             type = TokenType::Object;
-        } else if (s == "fn") {
+        } else if (s == "func") {
             type = TokenType::Function;
         } else if (s == "if") {
             type = TokenType::If;

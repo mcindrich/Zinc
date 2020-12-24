@@ -1,3 +1,15 @@
+namespace simple
+import std.string
 
+object Obj {
+    a type Int32
+    b type Int32
+}
 
-a simpleFunc(20, 30)
+func add(a type Int32, b type Int32) -> Int32 {
+    return a + b
+}
+
+func main(argc type Int32, argv type String) -> Int32 {
+
+}

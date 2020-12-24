@@ -22,6 +22,7 @@ namespace lang {
         EnumDef,
         FunctionDef,
         FunctionCall,
+        ArrayValue, // a[10]
         Return,
         Import,
         Namespace,
@@ -33,22 +34,23 @@ namespace lang {
 
     // used for debugging and possibly in the future for error messages
     inline const char *ASTTypeNameMap[] = {
-        "ASTType::Unknown",
-        "ASTType::Basic",
-        "ASTType::Operand",
-        "ASTType::Operator",
-        "ASTType::VariableDef",
-        "ASTType::ObjectDef",
-        "ASTType::EnumDef",
-        "ASTType::FunctionDef",
-        "ASTType::FunctionCall",
-        "ASTType::Return",
-        "ASTType::Import",
-        "ASTType::Namespace",
-        "ASTType::If",
-        "ASTType::Else",
-        "ASTType::For",
-        "ASTType::While",
+        "Unknown",
+        "Basic",
+        "Operand",
+        "Operator",
+        "VariableDef",
+        "ObjectDef",
+        "EnumDef",
+        "FunctionDef",
+        "FunctionCall",
+        "ArrayValue",
+        "Return",
+        "Import",
+        "Namespace",
+        "If",
+        "Else",
+        "For",
+        "While",
     };
 
     class AST {

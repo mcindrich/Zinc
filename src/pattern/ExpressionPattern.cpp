@@ -1,3 +1,4 @@
+#include "pattern/ArrayValuePattern.h"
 #include <pattern/TokenPattern.h>
 #include <pattern/ExpressionPattern.h>
 #include <pattern/FunctionCallPattern.h>
@@ -20,6 +21,7 @@ namespace lang {
     bool ExpressionPattern::matches(TokenIterator &beg, TokenIterator &end)
     {
         bool retval = true;
+        bool err = false;
         TokenIterator &it = beg;
 
         std::stack<Token> op_stack;
@@ -27,6 +29,7 @@ namespace lang {
 
         // watch for functions when the word appears
         FunctionCallPattern fcp;
+        ArrayValuePattern avp;
 
         while (it != end && it->type != m_endingToken) {
             if (it->type == TokenType::LParenth) {
@@ -37,6 +40,7 @@ namespace lang {
                     Token op = op_stack.top();
                     op_stack.pop();
                     if (expr_stack.size() < 2) {
+                        err = true;
                         break;
                     } else {
                         ASTPtr right = std::move(expr_stack.top());
@@ -55,7 +59,9 @@ namespace lang {
                     && op_stack.top().type != TokenType::LBracket) {
                     Token op = op_stack.top();
                     op_stack.pop();
+
                     if (expr_stack.size() < 2) {
+                        err = true;
                         break;
                     } else {
                         ASTPtr right = std::move(expr_stack.top());
@@ -73,6 +79,7 @@ namespace lang {
                     op_stack.pop();
 
                     if (expr_stack.size() < 2) {
+                        err = true;
                         break;
                     } else {
                         ASTPtr right = std::move(expr_stack.top());
@@ -94,10 +101,24 @@ namespace lang {
                     // checkings like simpleFunction(...)
 
                     // std::cout << "WORD: " << it->value << std::endl;
-                    if (fcp.matches(it, end)) {
-                        // fcp.getNode()->print(0);
-                        expr_stack.push(std::move(fcp.getNode()));
-                        continue;
+                    if ((it + 1) != end
+                        && (it + 1)->type == TokenType::LParenth) {
+                        if (fcp.matches(it, end)) {
+                            expr_stack.push(std::move(fcp.getNode()));
+                            continue;
+                        } else {
+                            // error => a(... but not function call
+                            err = true;
+                        }
+                    } else if ((it + 1) != end
+                        && (it + 1)->type == TokenType::LBracket) {
+                        if (avp.matches(it, end)) {
+                            expr_stack.push(std::move(fcp.getNode()));
+                            continue;
+                        } else {
+                            // error => a(... but not function call
+                            err = true;
+                        }
                     } else {
                         expr_stack.push(ASTPtr(new OperandAST(*it)));
                     }
@@ -106,12 +127,13 @@ namespace lang {
                     break;
                 }
             }
+            if (err) {
+                break;
+            }
             ++it;
         }
 
-        bool err = false;
-
-        while (op_stack.size() && op_stack.top().type >= it->type) {
+        while (op_stack.size() && op_stack.top().type >= it->type && !err) {
             Token op = op_stack.top();
             op_stack.pop();
 

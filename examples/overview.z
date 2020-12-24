@@ -24,19 +24,19 @@ object ObjExample {
 object MethodObject {
     v type ObjExample
 
-    fn doSomething() -> Int32 {
+    func doSomething() -> Int32 {
         return v.a + v.b
     }
 }
 
 ` functions
-fn exampleFunction(a type Int32) {
+func exampleFunction(a type Int32) {
     std.println(a.toString())
 }
 
 ` executables -> main
 
-fn main(argc type Int32, argv type String[]) -> Int32 {
+func main(argc type Int32, argv type String[]) -> Int32 {
     
     return 0
 }
