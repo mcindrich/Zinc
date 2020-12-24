@@ -109,11 +109,16 @@ namespace lang {
             ++it;
         }
 
+        bool err = false;
+
         while (op_stack.size() && op_stack.top().type >= it->type) {
             Token op = op_stack.top();
             op_stack.pop();
 
             if (expr_stack.size() < 2) {
+                // unable to finish tree creation when no 2 nodes can be added
+                // together with an operator
+                err = true;
                 break;
             } else {
                 ASTPtr right = std::move(expr_stack.top());
@@ -124,10 +129,12 @@ namespace lang {
             }
         }
 
-        if (expr_stack.size() == 1 && op_stack.size() == 0 && retval) {
+        if (expr_stack.size() == 1 && op_stack.size() == 0 && retval && !err) {
             // parsed correctly => return last node on the stack
             m_node = std::move(expr_stack.top());
             expr_stack.pop();
+        } else {
+            retval = false;
         }
 
         // move over ending token if not already parsed everything

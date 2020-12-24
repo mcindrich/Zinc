@@ -1,0 +1,3 @@
+import std
+
+a = 20 + 40

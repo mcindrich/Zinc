@@ -13,6 +13,7 @@ include_directories(
 
 # for settings and intellisense
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+SET(CMAKE_CXX_FLAGS  "-fstandalone-debug")
 
 add_library(
   zinc_lang

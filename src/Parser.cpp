@@ -5,6 +5,7 @@
 #include <pattern/PatternList.h>
 #include <pattern/ExpressionPattern.h>
 #include <pattern/TokenPattern.h>
+#include <pattern/PatternNotFoundException.h>
 #include <Utils.h>
 #include <InvalidFileException.h>
 #include <iostream>
@@ -41,7 +42,8 @@ namespace lang {
         for (int j = 0; j < ind; j++) {
             std::cout << "  ";
         }
-        std::cout << "> [\"" << node->getToken().value << "\"]" << std::endl;
+        std::cout << "> {" << (int)node->getType() << "}: [\""
+                  << node->getToken().value << "\"]" << std::endl;
         for (int i = 0; i < node->getChildrenCount(); i++) {
             AST_PRINT(node->getChild(i), ind + 1);
         }
@@ -112,16 +114,13 @@ namespace lang {
         TokenIterator curr = m_tokenizer.getIterator();
         TokenIterator end = m_tokenizer.getEndingIterator();
 
-        bool root_init = false;
-        bool done = false;
-
         // use for parsing blocks of data
         std::stack<ASTPtr *> node_stack;
         // current node following AST position
         ASTPtr *tmp_node = &m_root;
 
         while (curr != end) {
-            bool pattern_found = true;
+            bool pattern_found = false;
             if (curr->type == TokenType::Newline) {
                 ++curr;
                 continue;
@@ -213,12 +212,14 @@ namespace lang {
                         pattern_found = false;
                         break;
                     }
+                    pattern_found = true;
                     // found pattern => parse further
                     break;
                 }
             }
             if (!pattern_found) {
                 // error on curr->line
+                throw PatternNotFoundException(curr, end);
                 break;
             }
         }
