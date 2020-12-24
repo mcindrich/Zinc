@@ -33,6 +33,7 @@ add_library(
   "src/pattern/Pattern.cpp"
   "src/pattern/ExpressionPattern.cpp"
   "src/pattern/FunctionCallPattern.cpp"
+  "src/pattern/ArrayValuePattern.cpp"
   "src/pattern/TokenPattern.cpp"
   "src/pattern/PatternList.cpp"
 
