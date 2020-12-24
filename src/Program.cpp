@@ -25,7 +25,6 @@ int Program::run()
     try {
         m_compiler.compile(m_progName);
     } catch (lang::PatternNotFoundException &ex) {
-        std::cerr << "Pattern and parsing exception: " << std::endl;
         std::cerr << ex.what() << std::endl;
     } catch (std::runtime_error &ex) {
         std::cerr << ex.what() << std::endl;
