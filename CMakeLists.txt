@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(
   "src"
-  "argparse/include"
+  "deps/argparse/include"
 )
 
 # for settings and intellisense
