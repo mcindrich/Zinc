@@ -7,7 +7,7 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 17)
 
 include_directories(
-  "include"
+  "src"
   "argparse/include"
 )
 
@@ -18,29 +18,29 @@ add_library(
   zinc_lang
 
   # basic files
-  "src/lang/Utils.cpp"
-  "src/lang/Compiler.cpp"
-  "src/lang/Parser.cpp"
-  "src/lang/Tokenizer.cpp"
-  "src/lang/Token.cpp"
+  "src/Utils.cpp"
+  "src/Compiler.cpp"
+  "src/Parser.cpp"
+  "src/Tokenizer.cpp"
+  "src/Token.cpp"
 
   # pattern files
 
-  "src/lang/pattern/Pattern.cpp"
-  "src/lang/pattern/ExpressionPattern.cpp"
-  "src/lang/pattern/FunctionCallPattern.cpp"
-  "src/lang/pattern/TokenPattern.cpp"
-  "src/lang/pattern/PatternList.cpp"
+  "src/pattern/Pattern.cpp"
+  "src/pattern/ExpressionPattern.cpp"
+  "src/pattern/FunctionCallPattern.cpp"
+  "src/pattern/TokenPattern.cpp"
+  "src/pattern/PatternList.cpp"
 
   # AST files
-  "src/lang/ast/AST.cpp"
-  "src/lang/ast/OperatorAST.cpp"
-  "src/lang/ast/OperandAST.cpp"
+  "src/ast/AST.cpp"
+  "src/ast/OperatorAST.cpp"
+  "src/ast/OperandAST.cpp"
 )
 
 add_executable(
   zinc
-  "src/main.cpp"
+  "app/zinc.cpp"
   "src/Program.cpp"
 )
 

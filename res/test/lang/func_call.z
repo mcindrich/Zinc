@@ -1,6 +1,0 @@
-fn simpleFunction(a type Int32, b type Int32) -> Int32 {
-    return a + b * b
-}
-
-
-a = simpleFunction(10, 20) + 20

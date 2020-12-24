@@ -1,5 +1,4 @@
-#include <Program.hpp>
-#include <argparse/argparse.hpp>
+#include <Program.h>
 
 namespace zinc {
 Program::Program(int argc, char **argv)
