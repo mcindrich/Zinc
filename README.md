@@ -4,8 +4,8 @@ Programming language, written in C++.
 ## Compilation
 
 ```sh
-git clone https://github.com/mcindrich/Zinc
-cd Zinc
+git clone https://github.com/mcindrich/zinc --recursive
+cd zinc
 mkdir build && cd build && cmake .. && make -j$(nproc)
 ```
 
