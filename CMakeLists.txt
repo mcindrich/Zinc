@@ -42,13 +42,20 @@ add_library(
   "src/ast/OperandAST.cpp"
 )
 
+add_library(
+  zinc_vm
+
+  "src/VirtualMachine.cpp"
+  "src/Instruction.cpp"
+)
+
 add_executable(
   zinc
   "app/zinc.cpp"
   "src/Program.cpp"
 )
 
-target_link_libraries(zinc zinc_lang)
+target_link_libraries(zinc zinc_lang zinc_vm)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

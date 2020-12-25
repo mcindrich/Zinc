@@ -22,8 +22,10 @@ Program::Program(int argc, char **argv)
 
 int Program::run()
 {
+    int ret = 0;
     try {
         m_compiler.compile(m_progName);
+        ret = m_vm.execute(m_compiler.getInstructions());
     } catch (lang::PatternNotFoundException &ex) {
         std::cerr << "Pattern and parsing exception: " << std::endl;
         std::cerr << ex.what() << std::endl;
