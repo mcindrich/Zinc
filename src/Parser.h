@@ -13,7 +13,7 @@ namespace lang {
         void parseFile(const std::string &file_name);
 
     private:
-        void parseTokens();
+        bool parseTokens();
         ASTPtr m_root;
         Tokenizer m_tokenizer;
     };

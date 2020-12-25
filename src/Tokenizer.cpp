@@ -16,8 +16,6 @@
         || (t > TokenType::KW_START && t < TokenType::KW_END)                  \
         || t == TokenType::Comma)
 
-#define ZINC_LEXER_DBG
-
 #ifdef ZINC_LEXER_DBG
 #include <iostream>
 #endif
@@ -34,12 +32,11 @@ namespace lang {
         splitIntoTokens(INPUT);
 
 #ifdef ZINC_LEXER_DBG
-        std::cout << ">> SPLIT_TOKENS" << std::endl;
+        std::cout << "Tokens: " << std::endl;
         for (auto it = m_tokens.begin(); it != m_tokens.end(); it++) {
             std::cout << it->lineNumber << ": [\'" << it->value << "\', "
                       << (int)it->type << "]" << std::endl;
         }
-        std::cout << ">> END SPLIT_TOKENS" << std::endl;
 #endif
     }
 

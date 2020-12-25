@@ -16,7 +16,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compiler specific flags
 SET(CMAKE_CXX_FLAGS  "-fstandalone-debug")
+
+# compile options and defs
 add_compile_options(-Wall -Wextra -pedantic -Werror)
+add_compile_definitions(ZINC_LEXER_DBG)
 
 add_library(
   zinc_lang
@@ -27,9 +30,12 @@ add_library(
   "src/Parser.cpp"
   "src/Tokenizer.cpp"
   "src/Token.cpp"
+  "src/LanguageDefinition.cpp"
+  "src/FunctionDefinition.cpp"
+  "src/ObjectDefinition.cpp"
+  "src/EnumDefinition.cpp"
 
   # pattern files
-
   "src/pattern/Pattern.cpp"
   "src/pattern/ExpressionPattern.cpp"
   "src/pattern/FunctionCallPattern.cpp"

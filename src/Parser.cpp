@@ -53,8 +53,9 @@ namespace lang {
         AST_PRINT(node->getNext(), ind);
     }
 
-    void Parser::parseTokens()
+    bool Parser::parseTokens()
     {
+        bool retval = true;
         // tokenization succeeded -> search for patterns between tokens and
         // create an AST
 
@@ -229,10 +230,14 @@ namespace lang {
             if (!pattern_found) {
                 // error on curr->line
                 throw PatternNotFoundException(curr, end);
+                retval = false;
                 break;
             }
         }
-        AST_PRINT(m_root, 0);
+        if (retval) {
+            AST_PRINT(m_root, 0);
+        }
+        return retval;
     }
 }
 }
