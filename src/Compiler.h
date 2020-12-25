@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Instruction.h"
 #include <Parser.h>
 #include <list>
 
@@ -10,10 +11,13 @@ namespace lang {
         Compiler();
 
         void compile(std::string &prog_name);
+        std::list<vm::Instruction> &getInstructions();
 
     private:
         // compile using a parser and generate instructions from AST nodes
         Parser m_parser;
+
+        std::list<vm::Instruction> m_instructions;
     };
 }
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "VirtualMachine.h"
 #include <Compiler.h>
 #include <argparse/argparse.hpp>
 
@@ -17,5 +18,6 @@ private:
     std::string m_progName;
 
     lang::Compiler m_compiler;
+    vm::VirtualMachine m_vm;
 };
 }
